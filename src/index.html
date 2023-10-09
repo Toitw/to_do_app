@@ -4,9 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todin list</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Hello world</h1>
+    <div class="container">
+        <div class="sidebar">
+            <h1>To-Do List</h1>
+            <ul class="options">
+                <li class="option active">All Tasks</li>
+                <!-- Add more options here -->
+            </ul>
+            <div class="projects">
+                <!-- Projects will be added dynamically here -->
+            </div>
+        </div>
+        <div class="main">
+            <button class="add-task-button">Add Task</button>
+            <div class="task-details">
+                <h2>Task Details</h2>
+                <!-- Task details will be displayed here -->
+            </div>
+        </div>
+    </div>
+    <div class="task-modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Add a New Task</h2>
+            <form>
+                <input type="text" placeholder="Task Name" class="task-name">
+                <input type="text" placeholder="Due Time" class="due-time">
+                <textarea placeholder="Description" class="task-description"></textarea>
+                <select class="priority">
+                    <option value="low">Low Priority</option>
+                    <option value="medium">Medium Priority</option>
+                    <option value="high">High Priority</option>
+                </select>
+                <button type="submit">Add Task</button>
+            </form>
+        </div>
+    </div>
     <script src="index.js"></script>
 </body>
 </html>
