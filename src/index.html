@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todin list</title>
@@ -15,7 +16,10 @@
                 <!-- Add more options here -->
             </ul>
             <div class="projects">
-                <!-- Projects will be added dynamically here -->
+                <ul>
+                    <li class="default-project">Default</li>
+                    <!-- Projects will be added dynamically here -->
+                </ul>
             </div>
         </div>
         <div class="main">
@@ -30,19 +34,34 @@
         <div class="modal-content">
             <span class="close-button">&times;</span>
             <h2>Add a New Task</h2>
-            <form>
-                <input type="text" placeholder="Task Name" class="task-name">
-                <input type="text" placeholder="Due Time" class="due-time">
-                <textarea placeholder="Description" class="task-description"></textarea>
-                <select class="priority">
-                    <option value="low">Low Priority</option>
-                    <option value="medium">Medium Priority</option>
-                    <option value="high">High Priority</option>
+            <form class="task-form">
+                <label for="task-name">Task Name:</label>
+                <input type="text" id="task-name" name="taskName" required>
+              
+                <label for="project">Project:</label>
+                <select id="project" name="project">
+                  <option value="default">Default</option>
                 </select>
+              
+                <label for="due-date">Due date:</label>
+                <input type="text" id="due-date" name="dueDate" required>
+              
+                <label for="task-description">Description:</label>
+                <textarea id="task-description" name="taskDescription"></textarea>
+              
+                <label for="priority">Priority:</label>
+                <select id="priority" name="priority">
+                  <option value="low">Low Priority</option>
+                  <option value="medium">Medium Priority</option>
+                  <option value="high">High Priority</option>
+                </select>
+              
                 <button type="submit">Add Task</button>
-            </form>
+              </form>
         </div>
     </div>
     <script src="index.js"></script>
+    <script src="dom.js"></script>
+    <script src="tasks.js"></script>
 </body>
 </html>
