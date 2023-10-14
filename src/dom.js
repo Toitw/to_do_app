@@ -7,6 +7,7 @@ const taskModal = document.querySelector('.task-modal');
 
 addTaskButton.addEventListener('click', () => {
   taskModal.style.display = 'block';
+  updateProjectList();
 });
 
 //Close tasks modal
@@ -15,26 +16,29 @@ closeTaskButton.addEventListener('click', () => {
   taskModal.style.display = 'none';
 });
 
-// Update project list in the task modal
-const projectSelect = document.querySelector('#project');
+function updateProjectList() {
+  // Update project list in the task modal
+  const projectSelect = document.querySelector('#project');
 
-for (const project of projects) {
-  const projectOption = document.createElement('option');
-  projectOption.value = project.name;
-  projectOption.textContent = project.name;
-  projectSelect.appendChild(projectOption);
+  for (const project of projects) {
+    const projectOption = document.createElement('option');
+    projectOption.value = project.name;
+    projectOption.textContent = project.name;
+    projectSelect.appendChild(projectOption);
+  }
 }
 
 
 
-//Add project modal
+// Get the add project button and project modal
 const addProjectButton = document.querySelector('.add-project-button');
 const projectModal = document.querySelector('.project-modal');
 
+// Add an event listener to the add project button to open the project modal
 addProjectButton.addEventListener('click', () => {
   projectModal.style.display = 'block';
-}
-);
+});
+
 
 //Close projectmodal
 const closeProjectButton = document.querySelector('.project-close-button');
