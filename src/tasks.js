@@ -14,7 +14,9 @@ function Task(title, project, description, dueDate, priority) {
   const taskForm = document.querySelector('.task-form');
   const defaultProject = document.querySelector('.default-project');
 
-  
+  // Load tasks from web storage
+  let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
   // Add an event listener to the task form to handle form submissions
   taskForm.addEventListener('submit', (event) => {
     // Prevent the default form submission behavior
@@ -26,18 +28,14 @@ function Task(title, project, description, dueDate, priority) {
     const description = taskForm.elements['taskDescription'].value;
     const dueDate = taskForm.elements['dueDate'].value;
     const priority = taskForm.elements['priority'].value;
+    const completed = false;
   
     // Create a new task object using the Task object factory
-    const task = Task(title, project, description, dueDate, priority);
-  
-    // Add the task to the task list
-    const taskItemlist = document.createElement('ul');
-    taskItemlist.classList.add('task-item-list');
-    const taskItem = document.createElement('li');
-    taskItem.classList.add('task-item');
-    taskItem.innerHTML = task.title;
-    defaultProject.appendChild(taskItemlist);
-    taskItemlist.appendChild(taskItem);
+    const task = Task(title, project, description, dueDate, priority, completed);
+
+    // Store the task in web storage
+    tasks.push(task);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
   
     // Clear the form fields
     taskForm.reset();
