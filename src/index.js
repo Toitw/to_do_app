@@ -1,5 +1,5 @@
-import { displayProjects } from "./dom.js";
+import { updateProjects } from "./dom.js";
 import { initProjects } from "./projects.js";
 
 initProjects();
-displayProjects();
+updateProjects();

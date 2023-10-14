@@ -17,14 +17,21 @@ closeTaskButton.addEventListener('click', () => {
 });
 
 function updateProjectList() {
-  // Update project list in the task modal
+  // Get the project select element
   const projectSelect = document.querySelector('#project');
 
+  // Loop through the projects array
   for (const project of projects) {
-    const projectOption = document.createElement('option');
-    projectOption.value = project.name;
-    projectOption.textContent = project.name;
-    projectSelect.appendChild(projectOption);
+    // Check if an option with the project name already exists
+    const existingOption = projectSelect.querySelector(`option[value="${project.name}"]`);
+
+    // If an option does not exist, create a new one and add it to the project select element
+    if (!existingOption) {
+      const projectOption = document.createElement('option');
+      projectOption.value = project.name;
+      projectOption.textContent = project.name;
+      projectSelect.appendChild(projectOption);
+    }
   }
 }
 
@@ -47,26 +54,71 @@ closeProjectButton.addEventListener('click', () => {
 });
 
 // Display projects
-function displayProjects() {
+function updateProjects() {
   const projectList = document.querySelector('.project-list');
 
   for (const project of projects) {
-    const projectItem = document.createElement('li');
-    projectItem.textContent = project.name;
-    projectList.appendChild(projectItem);
-
-    const taskList = document.createElement('ul');
-    projectItem.appendChild(taskList);
-
-    for (const task of project.tasks) {
-      const taskItem = document.createElement('li');
-      taskItem.textContent = task.title;
-      taskList.appendChild(taskItem);
+    // Check if a project item with the project name already exists
+    const existingProjectItem = projectList.querySelector(`li[data-project="${project.name}"]`);
+  
+    // If a project item does not exist, create a new one and add it to the project list
+    if (!existingProjectItem) {
+      const projectItem = document.createElement('li');
+      projectItem.dataset.project = project.name;
+      projectItem.textContent = project.name;
+      projectList.appendChild(projectItem);
+  
+      const taskList = document.createElement('ul');
+      projectItem.appendChild(taskList);
+  
+      for (const task of project.tasks) {
+        // Check if a task item with the task title already exists
+        const existingTaskItem = taskList.querySelector(`li[data-task="${task.title}"]`);
+  
+        // If a task item does not exist, create a new one and add it to the task list
+        if (!existingTaskItem) {
+          const taskItem = document.createElement('li');
+          taskItem.dataset.task = task.title;
+          taskItem.textContent = task.title;
+          taskList.appendChild(taskItem);
+        }
+      }
+    } else {
+      // If a project item already exists, update the task list
+      const taskList = existingProjectItem.querySelector('ul');
+  
+      for (const task of project.tasks) {
+        // Check if a task item with the task title already exists
+        const existingTaskItem = taskList.querySelector(`li[data-task="${task.title}"]`);
+  
+        // If a task item does not exist, create a new one and add it to the task list
+        if (!existingTaskItem) {
+          const taskItem = document.createElement('li');
+          taskItem.dataset.task = task.title;
+          taskItem.textContent = task.title;
+          taskList.appendChild(taskItem);
+        }
+      }
     }
   }
 }
 
-export { displayProjects };
+//Function to update the project and task lists
+const taskForm = document.querySelector('.task-form');
+const projectForm = document.querySelector('.project-form');
+
+taskForm.addEventListener('submit', (event) => {
+  event.preventDefault(); 
+  updateProjects();
+});
+
+projectForm.addEventListener('submit', (event) => {
+  event.preventDefault(); 
+  updateProjects();
+});
+
+
+export { updateProjects };
 
 
 
