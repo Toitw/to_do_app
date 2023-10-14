@@ -1,3 +1,5 @@
+import { projects } from "./projects.js";
+
 // Define the Task object factory
 function Task(title, project, description, dueDate, priority) {
     return {
@@ -9,10 +11,9 @@ function Task(title, project, description, dueDate, priority) {
       completed: false
     };
   }
-  
-  // Get a reference to the task form
+
+  // Get the task form
   const taskForm = document.querySelector('.task-form');
-  const defaultProject = document.querySelector('.default-project');
 
   // Load tasks from web storage
   let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
@@ -36,8 +37,15 @@ function Task(title, project, description, dueDate, priority) {
     // Store the task in web storage
     tasks.push(task);
     localStorage.setItem('tasks', JSON.stringify(tasks));
+
+    // Add the task to the project and store it in web storage
+    project.tasks.push(task);
+    localStorage.setItem('projects', JSON.stringify(projects));
   
     // Clear the form fields
     taskForm.reset();
   });
+
+  // Export the tasks array
+  export { tasks };
 
