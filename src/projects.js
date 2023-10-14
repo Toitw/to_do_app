@@ -9,6 +9,18 @@ function Project(name, tasks) {
 // Load projects from web storage
 let projects = JSON.parse(localStorage.getItem('projects')) || [];
 
+function initProjects() {
+  // Check if the "Default" project already exists
+  const defaultProject = projects.find((project) => project.name === 'Default');
+
+  // If the "Default" project does not exist, create it
+  if (!defaultProject) {
+    const newDefaultProject = Project('Default', []);
+    projects.push(newDefaultProject);
+    localStorage.setItem('projects', JSON.stringify(projects));
+  }
+}
+
 //Get the project form
 const projectForm = document.querySelector('.project-form');
 
@@ -32,4 +44,4 @@ projectForm.addEventListener('submit', (event) => {
 });
 
 // Export the projects array and the createProject function
-export { projects };
+export { initProjects, projects };

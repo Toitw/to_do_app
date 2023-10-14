@@ -44,12 +44,12 @@ closeProjectButton.addEventListener('click', () => {
 
 // Display projects
 function displayProjects() {
-  const defaultProject = document.querySelector('.default-project');
+  const projectList = document.querySelector('.project-list');
 
   for (const project of projects) {
     const projectItem = document.createElement('li');
     projectItem.textContent = project.name;
-    defaultProject.appendChild(projectItem);
+    projectList.appendChild(projectItem);
 
     const taskList = document.createElement('ul');
     projectItem.appendChild(taskList);

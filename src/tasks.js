@@ -25,22 +25,27 @@ function Task(title, project, description, dueDate, priority) {
   
     // Get the values of the form fields
     const title = taskForm.elements['taskName'].value;
-    const project = taskForm.elements['project'].value;
+    const projectName = taskForm.elements['project'].value;
     const description = taskForm.elements['taskDescription'].value;
     const dueDate = taskForm.elements['dueDate'].value;
     const priority = taskForm.elements['priority'].value;
     const completed = false;
+
+    // Find the project object with the matching name
+    const project = projects.find((project) => project.name === projectName);
   
     // Create a new task object using the Task object factory
-    const task = Task(title, project, description, dueDate, priority, completed);
+    const task = Task(title, projectName, description, dueDate, priority, completed);
 
     // Store the task in web storage
     tasks.push(task);
     localStorage.setItem('tasks', JSON.stringify(tasks));
 
     // Add the task to the project and store it in web storage
-    project.tasks.push(task);
-    localStorage.setItem('projects', JSON.stringify(projects));
+    if (project) {
+      project.tasks.push(task);
+      localStorage.setItem('projects', JSON.stringify(projects));
+    }
   
     // Clear the form fields
     taskForm.reset();
