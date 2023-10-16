@@ -48,6 +48,10 @@ body, ul {
     margin-top: 20px;
 }
 
+.task-item {
+  cursor: default;
+}
+
 /* Style for the main section */
 .main {
     flex: 1;
@@ -70,12 +74,50 @@ body, ul {
 
 /* Style for task details section */
 .task-details {
-    margin-top: 20px;
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #f0f0f0;
     border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 5px;
-    background-color: #fff;
-}
+    border-radius: 0.5rem;
+    width: 100%;
+    max-width: 600px;
+  }
+
+.task-details h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+  
+  .task-details-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .task-details-label {
+    font-weight: bold;
+    margin-right: 1rem;
+    flex-basis: 100px;
+  }
+  
+  .task-details-value {
+    flex-grow: 1;
+  }
+  
+  .complete-task-button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+  }
+  
+  .complete-task-button:hover {
+    background-color: #0069d9;
+  }
 
 /* Style for the task modal */
 .task-modal {

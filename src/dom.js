@@ -53,7 +53,7 @@ closeProjectButton.addEventListener('click', () => {
   projectModal.style.display = 'none';
 });
 
-// Display projects
+// Display projects/tasks on the menu
 function updateProjects() {
   const projectList = document.querySelector('.project-list');
 
@@ -78,6 +78,7 @@ function updateProjects() {
         // If a task item does not exist, create a new one and add it to the task list
         if (!existingTaskItem) {
           const taskItem = document.createElement('li');
+          taskItem.classList.add('task-item');
           taskItem.dataset.task = task.title;
           taskItem.textContent = task.title;
           taskList.appendChild(taskItem);
@@ -116,6 +117,36 @@ projectForm.addEventListener('submit', (event) => {
   event.preventDefault(); 
   updateProjects();
 });
+
+//Display task details
+
+document.addEventListener('DOMContentLoaded', () => {
+  const taskItems = document.querySelectorAll('.task-item');
+  const taskDetailsProject = document.querySelector('#task-details-project');
+  const taskDetailsTitle = document.querySelector('#task-details-title');
+  const taskDetailsDescription = document.querySelector('#task-details-description');
+  const taskDetailsDueDate = document.querySelector('#task-details-due-date');
+  const taskDetailsPriority = document.querySelector('#task-details-priority');
+
+  taskItems.forEach((taskItem) => {
+    taskItem.addEventListener('click', (event) => {
+      // Get the task title from the clicked task item element
+      const taskTitle = event.target.dataset.task;
+
+      // Find the task with the matching title
+      const task = tasks.find((task) => task.title === taskTitle);
+
+      // Update the task details with the task information
+      taskDetailsProject.textContent = `${task.project}`;
+      taskDetailsTitle.textContent = `${task.title}`;
+      taskDetailsDescription.textContent = `${task.description}`;
+      taskDetailsDueDate.textContent = `${task.dueDate}`;
+      taskDetailsPriority.textContent = `${task.priority}`;
+    });
+  });
+});
+
+//Complete a task
 
 
 export { updateProjects };
