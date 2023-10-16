@@ -120,6 +120,23 @@ projectForm.addEventListener('submit', (event) => {
 
 //Display task details
 
+function createTaskItemEventListener(taskItems, taskDetailsProject, taskDetailsTitle, taskDetailsDescription, taskDetailsDueDate, taskDetailsPriority) {
+  return function(event) {
+    // Get the task title from the clicked task item element
+    const taskTitle = event.target.dataset.task;
+
+    // Find the task with the matching title
+    const task = tasks.find((task) => task.title === taskTitle);
+
+    // Update the task details with the task information
+    taskDetailsProject.textContent = `${task.project}`;
+    taskDetailsTitle.textContent = `${task.title}`;
+    taskDetailsDescription.textContent = `${task.description}`;
+    taskDetailsDueDate.textContent = `${task.dueDate}`;
+    taskDetailsPriority.textContent = `${task.priority}`;
+  };
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const taskItems = document.querySelectorAll('.task-item');
   const taskDetailsProject = document.querySelector('#task-details-project');
@@ -128,21 +145,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const taskDetailsDueDate = document.querySelector('#task-details-due-date');
   const taskDetailsPriority = document.querySelector('#task-details-priority');
 
+  const taskItemEventListener = createTaskItemEventListener(taskItems, taskDetailsProject, taskDetailsTitle, taskDetailsDescription, taskDetailsDueDate, taskDetailsPriority);
+
   taskItems.forEach((taskItem) => {
-    taskItem.addEventListener('click', (event) => {
-      // Get the task title from the clicked task item element
-      const taskTitle = event.target.dataset.task;
-
-      // Find the task with the matching title
-      const task = tasks.find((task) => task.title === taskTitle);
-
-      // Update the task details with the task information
-      taskDetailsProject.textContent = `${task.project}`;
-      taskDetailsTitle.textContent = `${task.title}`;
-      taskDetailsDescription.textContent = `${task.description}`;
-      taskDetailsDueDate.textContent = `${task.dueDate}`;
-      taskDetailsPriority.textContent = `${task.priority}`;
-    });
+    taskItem.addEventListener('click', taskItemEventListener);
   });
 });
 
