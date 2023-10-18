@@ -1,4 +1,4 @@
-import { tasks } from './tasks.js';
+import { tasks, notCompletedTasks } from './tasks.js';
 import { projects } from './projects.js';
 
 //Open tasks modal
@@ -83,7 +83,12 @@ window.addEventListener('DOMContentLoaded', () => {
   for (const project of projects) {
     addProjectToList(project);
     for (const task of project.tasks) {
-      addTaskToList(task, project);
+      console.log(task.completed)
+      if (task.completed != true) {
+        addTaskToList(task, project);
+      } else {
+        continue;
+      }
     }
   }
 });

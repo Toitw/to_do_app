@@ -1,5 +1,5 @@
 import { projects } from "./projects.js";
-import { addTaskToList } from "./dom.js";
+import { addTaskToList, closeModal } from "./dom.js";
 
 // Define the Task object factory
 function Task(title, project, description, dueDate, priority) {
@@ -53,8 +53,16 @@ function Task(title, project, description, dueDate, priority) {
   
     // Clear the form fields
     taskForm.reset();
+
+    // Close the form
+    closeModal();
   });
 
+  //Not completed tasks
+  function notCompletedTasks() {
+    return tasks.filter((task) => !task.completed);
+  }
+
   // Export the tasks array
-  export { tasks };
+  export { tasks, notCompletedTasks };
 
