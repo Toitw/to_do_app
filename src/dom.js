@@ -48,114 +48,77 @@ addProjectButton.addEventListener('click', () => {
 
 
 //Close projectmodal
+function closeModal() {
+  projectModal.style.display = 'none';
+}
+
 const closeProjectButton = document.querySelector('.project-close-button');
 closeProjectButton.addEventListener('click', () => {
-  projectModal.style.display = 'none';
+  closeModal();
 });
 
-// Display projects/tasks on the menu
-function updateProjects() {
+//Add project to the project list
+function addProjectToList(project) {
+  const projectName = project.name;
   const projectList = document.querySelector('.project-list');
+  const projectItem = document.createElement('li');
+  projectItem.classList.add('project-item');
+  projectItem.dataset.project = projectName;
+  projectItem.textContent = projectName;
+  projectList.appendChild(projectItem);
+}
 
+//Add task to the task list
+function addTaskToList(task, project) {
+  const projectItem = document.querySelector(`li[data-project="${project.name}"]`);
+  const taskItem = document.createElement('li');
+  taskItem.classList.add('task-item');
+  taskItem.dataset.task = task.title;
+  taskItem.textContent = task.title;
+  projectItem.appendChild(taskItem);
+}
+
+//Display project/task list on the menu
+window.addEventListener('DOMContentLoaded', () => {
   for (const project of projects) {
-    // Check if a project item with the project name already exists
-    const existingProjectItem = projectList.querySelector(`li[data-project="${project.name}"]`);
-  
-    // If a project item does not exist, create a new one and add it to the project list
-    if (!existingProjectItem) {
-      const projectItem = document.createElement('li');
-      projectItem.dataset.project = project.name;
-      projectItem.textContent = project.name;
-      projectList.appendChild(projectItem);
-  
-      const taskList = document.createElement('ul');
-      projectItem.appendChild(taskList);
-  
-      for (const task of project.tasks) {
-        // Check if a task item with the task title already exists
-        const existingTaskItem = taskList.querySelector(`li[data-task="${task.title}"]`);
-  
-        // If a task item does not exist, create a new one and add it to the task list
-        if (!existingTaskItem) {
-          const taskItem = document.createElement('li');
-          taskItem.classList.add('task-item');
-          taskItem.dataset.task = task.title;
-          taskItem.textContent = task.title;
-          taskList.appendChild(taskItem);
-        }
-      }
-    } else {
-      // If a project item already exists, update the task list
-      const taskList = existingProjectItem.querySelector('ul');
-  
-      for (const task of project.tasks) {
-        // Check if a task item with the task title already exists
-        const existingTaskItem = taskList.querySelector(`li[data-task="${task.title}"]`);
-  
-        // If a task item does not exist, create a new one and add it to the task list
-        if (!existingTaskItem) {
-          const taskItem = document.createElement('li');
-          taskItem.dataset.task = task.title;
-          taskItem.textContent = task.title;
-          taskList.appendChild(taskItem);
-        }
-      }
+    addProjectToList(project);
+    for (const task of project.tasks) {
+      addTaskToList(task, project);
     }
+  }
+});
+
+// Display task details
+const projectList = document.querySelector('.project-list');
+projectList.addEventListener('click', displayTaskDetails);
+
+function displayTaskDetails(event) {
+  if (event.target.classList.contains('task-item')) {
+    const taskTitle = event.target.dataset.task;
+    const task = tasks.find((task) => task.title === taskTitle);
+    updateTaskDetails(task);
   }
 }
 
-//Function to update the project and task lists
-const taskForm = document.querySelector('.task-form');
-const projectForm = document.querySelector('.project-form');
-
-taskForm.addEventListener('submit', (event) => {
-  event.preventDefault(); 
-  updateProjects();
-});
-
-projectForm.addEventListener('submit', (event) => {
-  event.preventDefault(); 
-  updateProjects();
-});
-
-//Display task details
-
-function createTaskItemEventListener(taskItems, taskDetailsProject, taskDetailsTitle, taskDetailsDescription, taskDetailsDueDate, taskDetailsPriority) {
-  return function(event) {
-    // Get the task title from the clicked task item element
-    const taskTitle = event.target.dataset.task;
-
-    // Find the task with the matching title
-    const task = tasks.find((task) => task.title === taskTitle);
-
-    // Update the task details with the task information
-    taskDetailsProject.textContent = `${task.project}`;
-    taskDetailsTitle.textContent = `${task.title}`;
-    taskDetailsDescription.textContent = `${task.description}`;
-    taskDetailsDueDate.textContent = `${task.dueDate}`;
-    taskDetailsPriority.textContent = `${task.priority}`;
-  };
+function updateTaskDetails(task) {
+  const taskProjectName = document.querySelector('#task-details-project');
+  taskProjectName.textContent = task.project;
+  const taskTitleElement = document.querySelector('#task-details-title');
+  taskTitleElement.textContent = task.title;
+  const taskDescription = document.querySelector('#task-details-description');
+  taskDescription.textContent = task.description;
+  const taskDueDate = document.querySelector('#task-details-due-date');
+  taskDueDate.textContent = task.dueDate;
+  const taskPriority = document.querySelector('#task-details-priority');
+  taskPriority.textContent = task.priority;
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const taskItems = document.querySelectorAll('.task-item');
-  const taskDetailsProject = document.querySelector('#task-details-project');
-  const taskDetailsTitle = document.querySelector('#task-details-title');
-  const taskDetailsDescription = document.querySelector('#task-details-description');
-  const taskDetailsDueDate = document.querySelector('#task-details-due-date');
-  const taskDetailsPriority = document.querySelector('#task-details-priority');
-
-  const taskItemEventListener = createTaskItemEventListener(taskItems, taskDetailsProject, taskDetailsTitle, taskDetailsDescription, taskDetailsDueDate, taskDetailsPriority);
-
-  taskItems.forEach((taskItem) => {
-    taskItem.addEventListener('click', taskItemEventListener);
-  });
-});
-
-//Complete a task
 
 
-export { updateProjects };
+
+
+
+export { addProjectToList, addTaskToList, closeModal };
 
 
 

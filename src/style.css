@@ -50,6 +50,8 @@ body, ul {
 
 .task-item {
   cursor: default;
+  color: #e65a5a;
+  list-style-type: none;
 }
 
 /* Style for the main section */

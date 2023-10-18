@@ -1,3 +1,5 @@
+import { addProjectToList, closeModal } from './dom.js';
+
 // Define the Project object factory
 function Project(name, tasks) {
     return {
@@ -39,8 +41,14 @@ projectForm.addEventListener('submit', (event) => {
     projects.push(project);
     localStorage.setItem('projects', JSON.stringify(projects));
 
+    //Add the project to the project list
+    addProjectToList(project);
+
     //Clear the form fields
     projectForm.reset();
+
+    //Close the form
+    closeModal();
 });
 
 // Export the projects array and the createProject function

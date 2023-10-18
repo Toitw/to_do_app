@@ -1,4 +1,5 @@
 import { projects } from "./projects.js";
+import { addTaskToList } from "./dom.js";
 
 // Define the Task object factory
 function Task(title, project, description, dueDate, priority) {
@@ -46,6 +47,9 @@ function Task(title, project, description, dueDate, priority) {
       project.tasks.push(task);
       localStorage.setItem('projects', JSON.stringify(projects));
     }
+
+    // Add the task to the task list
+    addTaskToList(task, project);
   
     // Clear the form fields
     taskForm.reset();
