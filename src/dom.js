@@ -3,6 +3,7 @@ import { projects } from './projects.js';
 
 let activeTask = null;
 
+
 //Open tasks modal
 const addTaskButton = document.querySelector('.add-task-button');
 const taskModal = document.querySelector('.task-modal');
@@ -80,16 +81,17 @@ function addTaskToList(task, project) {
   projectItem.appendChild(taskItem);
 }
 
-//Display project/task list on the menu
+// Initialize showCompleted variable from local storage or default to false
+let showCompleted = JSON.parse(localStorage.getItem('showCompleted')) || false;
+
 window.addEventListener('DOMContentLoaded', () => {
   for (const project of projects) {
     addProjectToList(project);
     for (const task of project.tasks) {
-      if (task.completed != true) {
-        console.log(task);
+      if (showCompleted) {
         addTaskToList(task, project);
-      } else {
-        continue;
+      } else if (!task.completed && !showCompleted) {
+        addTaskToList(task, project);
       }
     }
   }
@@ -129,12 +131,19 @@ completeTaskButton.addEventListener('click', () => {
   completeTask(activeTask);
   updateTaskDetails(activeTask);
   location.reload();
-  // const taskItem = document.querySelector(`li[data-task="${activeTask.title}"]`);
-  // taskItem.remove();
 });
 
 
 
+//Show completed tasks
+const showCompletedButton = document.querySelector('.show-completed-button');
+showCompletedButton.textContent = showCompleted ? 'Hide completed' : 'Show completed';
+showCompletedButton.addEventListener('click', () => {
+  showCompleted = !showCompleted;
+  showCompletedButton.textContent = showCompleted ? 'Hide completed' : 'Show completed';
+  localStorage.setItem('showCompleted', JSON.stringify(showCompleted));
+  location.reload();
+});
 
 
 
