@@ -108,6 +108,7 @@ body, ul {
   }
   
   .complete-task-button {
+    display: none;
     margin-top: 1rem;
     padding: 0.5rem 1rem;
     background-color: #007bff;

@@ -102,12 +102,14 @@ const projectList = document.querySelector('.project-list');
 projectList.addEventListener('click', displayTaskDetails);
 
 function displayTaskDetails(event) {
+  const completedTaskButton = document.querySelector('.complete-task-button');
   if (event.target.classList.contains('task-item')) {
     const taskTitle = event.target.dataset.task;
     const taskProjectName = event.target.closest('[data-project]').dataset.project;
     const project = projects.find((project) => project.name === taskProjectName);
     const task = project.tasks.find((task) => task.title === taskTitle);
     activeTask = task;
+    completedTaskButton.style.display = 'block';
     updateTaskDetails(task);
   }
 }
