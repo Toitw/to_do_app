@@ -1,5 +1,7 @@
-import { tasks, notCompletedTasks } from './tasks.js';
+import { notCompletedTasks, completeTask } from './tasks.js';
 import { projects } from './projects.js';
+
+let activeTask = null;
 
 //Open tasks modal
 const addTaskButton = document.querySelector('.add-task-button');
@@ -83,8 +85,8 @@ window.addEventListener('DOMContentLoaded', () => {
   for (const project of projects) {
     addProjectToList(project);
     for (const task of project.tasks) {
-      console.log(task.completed)
       if (task.completed != true) {
+        console.log(task);
         addTaskToList(task, project);
       } else {
         continue;
@@ -100,7 +102,10 @@ projectList.addEventListener('click', displayTaskDetails);
 function displayTaskDetails(event) {
   if (event.target.classList.contains('task-item')) {
     const taskTitle = event.target.dataset.task;
-    const task = tasks.find((task) => task.title === taskTitle);
+    const taskProjectName = event.target.closest('[data-project]').dataset.project;
+    const project = projects.find((project) => project.name === taskProjectName);
+    const task = project.tasks.find((task) => task.title === taskTitle);
+    activeTask = task;
     updateTaskDetails(task);
   }
 }
@@ -117,6 +122,17 @@ function updateTaskDetails(task) {
   const taskPriority = document.querySelector('#task-details-priority');
   taskPriority.textContent = task.priority;
 }
+
+//Complete task
+const completeTaskButton = document.querySelector('.complete-task-button');
+completeTaskButton.addEventListener('click', () => {
+  completeTask(activeTask);
+  updateTaskDetails(activeTask);
+  location.reload();
+  // const taskItem = document.querySelector(`li[data-task="${activeTask.title}"]`);
+  // taskItem.remove();
+});
+
 
 
 

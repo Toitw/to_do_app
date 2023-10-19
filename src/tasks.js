@@ -38,10 +38,6 @@ function Task(title, project, description, dueDate, priority) {
     // Create a new task object using the Task object factory
     const task = Task(title, projectName, description, dueDate, priority, completed);
 
-    // Store the task in web storage
-    tasks.push(task);
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-
     // Add the task to the project and store it in web storage
     if (project) {
       project.tasks.push(task);
@@ -63,6 +59,21 @@ function Task(title, project, description, dueDate, priority) {
     return tasks.filter((task) => !task.completed);
   }
 
+  //Complete task
+  function completeTask(task) {
+    const projects = JSON.parse(localStorage.getItem('projects'));
+    for (const project of projects) {
+      const tasks = project.tasks;
+      for (const t of tasks) {
+        if (t.title === task.title && t.projectName === task.projectName) {
+          t.completed = true;
+          localStorage.setItem('projects', JSON.stringify(projects));
+          return;
+        }
+      }
+    }
+  }
+
   // Export the tasks array
-  export { tasks, notCompletedTasks };
+  export { notCompletedTasks, completeTask };
 
