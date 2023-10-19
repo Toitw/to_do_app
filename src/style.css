@@ -122,6 +122,21 @@ body, ul {
     background-color: #0069d9;
   }
 
+  .delete-task-button {
+    display: none;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #e65a5a;
+    color: #fff;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+  }
+
+  .delete-task-button:hover {
+    background-color: #e63a3a;
+  }
+
 /* Style for the task modal */
 .task-modal {
     display: none;

@@ -1,4 +1,4 @@
-import { notCompletedTasks, completeTask } from './tasks.js';
+import { notCompletedTasks, completeTask, deleteTask } from './tasks.js';
 import { projects } from './projects.js';
 
 let activeTask = null;
@@ -103,6 +103,7 @@ projectList.addEventListener('click', displayTaskDetails);
 
 function displayTaskDetails(event) {
   const completedTaskButton = document.querySelector('.complete-task-button');
+  const deleteTaskButton = document.querySelector('.delete-task-button');
   if (event.target.classList.contains('task-item')) {
     const taskTitle = event.target.dataset.task;
     const taskProjectName = event.target.closest('[data-project]').dataset.project;
@@ -110,6 +111,7 @@ function displayTaskDetails(event) {
     const task = project.tasks.find((task) => task.title === taskTitle);
     activeTask = task;
     completedTaskButton.style.display = 'block';
+    deleteTaskButton.style.display = 'block';
     updateTaskDetails(task);
   }
 }
@@ -135,8 +137,6 @@ completeTaskButton.addEventListener('click', () => {
   location.reload();
 });
 
-
-
 //Show completed tasks
 const showCompletedButton = document.querySelector('.show-completed-button');
 showCompletedButton.textContent = showCompleted ? 'Hide completed' : 'Show completed';
@@ -146,6 +146,14 @@ showCompletedButton.addEventListener('click', () => {
   localStorage.setItem('showCompleted', JSON.stringify(showCompleted));
   location.reload();
 });
+
+//Delete task
+const deleteTaskButton = document.querySelector('.delete-task-button');
+deleteTaskButton.addEventListener('click', () => {
+  deleteTask(activeTask);
+  location.reload();
+});
+
 
 
 

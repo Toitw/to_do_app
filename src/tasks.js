@@ -74,6 +74,22 @@ function Task(title, project, description, dueDate, priority) {
     }
   }
 
+  //Delete task
+  function deleteTask(task) {
+    const projects = JSON.parse(localStorage.getItem('projects'));
+    for (const project of projects) {
+      const tasks = project.tasks;
+      for (const t of tasks) {
+        if (t.title === task.title && t.projectName === task.projectName) {
+          const index = tasks.indexOf(t);
+          tasks.splice(index, 1);
+          localStorage.setItem('projects', JSON.stringify(projects));
+          return;
+        }
+      }
+    }
+  }
+
   // Export the tasks array
-  export { notCompletedTasks, completeTask };
+  export { notCompletedTasks, completeTask, deleteTask };
 
