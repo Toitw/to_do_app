@@ -33,22 +33,31 @@ projectForm.addEventListener('submit', (event) => {
 
     //Get the values of the form fields
     const name = projectForm.elements['projectName'].value;
+    // Check if a project with the same name already exists
+    const existingProject = projects.find((p) => p.name === name);
+    if (existingProject) {
+      const errorMessage = `A project with the name "${name}" already exists.`;
+      const errorElement = document.createElement('p');
+      errorElement.textContent = errorMessage;
+      errorElement.classList.add('project-name-error-message');
+      projectForm.appendChild(errorElement);
+    } else {
+      //Create a new project object using the Project object factory
+      const project = Project(name, []);
 
-    //Create a new project object using the Project object factory
-    const project = Project(name, []);
+      //Store the project in web storage
+      projects.push(project);
+      localStorage.setItem('projects', JSON.stringify(projects));
 
-    //Store the project in web storage
-    projects.push(project);
-    localStorage.setItem('projects', JSON.stringify(projects));
+      //Add the project to the project list
+      addProjectToList(project);
 
-    //Add the project to the project list
-    addProjectToList(project);
+      //Clear the form fields
+      projectForm.reset();
 
-    //Clear the form fields
-    projectForm.reset();
-
-    //Close the form
-    closeModal();
+      //Close the form
+      closeModal();
+    }
 });
 
 // Export the projects array and the createProject function
