@@ -54,11 +54,6 @@ function Task(title, project, description, dueDate, priority) {
     closeModal();
   });
 
-  //Not completed tasks
-  function notCompletedTasks() {
-    return tasks.filter((task) => !task.completed);
-  }
-
   //Complete task
   function completeTask(task) {
     const projects = JSON.parse(localStorage.getItem('projects'));
@@ -91,5 +86,5 @@ function Task(title, project, description, dueDate, priority) {
   }
 
   // Export the tasks array
-  export { notCompletedTasks, completeTask, deleteTask };
+  export { completeTask, deleteTask };
 

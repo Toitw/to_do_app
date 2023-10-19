@@ -1,4 +1,4 @@
-import { notCompletedTasks, completeTask, deleteTask } from './tasks.js';
+import { completeTask, deleteTask } from './tasks.js';
 import { projects } from './projects.js';
 
 let activeTask = null;
