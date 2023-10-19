@@ -34,24 +34,33 @@ function Task(title, project, description, dueDate, priority) {
 
     // Find the project object with the matching name
     const project = projects.find((project) => project.name === projectName);
-  
-    // Create a new task object using the Task object factory
-    const task = Task(title, projectName, description, dueDate, priority, completed);
+    const existingTask = project.tasks.find((task) => task.title === title);
+    if (existingTask && existingTask.completed === false) {
+      const errorMessage = `A task with the name "${title}" already exists in the "${projectName}" project.`;
+      const errorElement = document.createElement('p');
+      errorElement.textContent = errorMessage;
+      errorElement.classList.add('task-name-error-message');
+      taskForm.appendChild(errorElement);
+      return;
+    } else {
+      // Create a new task object using the Task object factory
+      const task = Task(title, projectName, description, dueDate, priority, completed);
 
-    // Add the task to the project and store it in web storage
-    if (project) {
-      project.tasks.push(task);
-      localStorage.setItem('projects', JSON.stringify(projects));
+      // Add the task to the project and store it in web storage
+      if (project) {
+        project.tasks.push(task);
+        localStorage.setItem('projects', JSON.stringify(projects));
+      }
+
+      // Add the task to the task list
+      addTaskToList(task, project);
+    
+      // Clear the form fields
+      taskForm.reset();
+
+      // Close the form
+      closeModal();
     }
-
-    // Add the task to the task list
-    addTaskToList(task, project);
-  
-    // Clear the form fields
-    taskForm.reset();
-
-    // Close the form
-    closeModal();
   });
 
   //Complete task
