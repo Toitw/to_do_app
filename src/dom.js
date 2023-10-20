@@ -1,5 +1,6 @@
 import { completeTask, deleteTask } from './tasks.js';
 import { projects } from './projects.js';
+import { setValid, getValid } from './validations.js';
 
 let activeTask = null;
 
@@ -11,6 +12,65 @@ const taskModal = document.querySelector('.task-modal');
 addTaskButton.addEventListener('click', () => {
   taskModal.style.display = 'block';
   updateProjectList();
+  // Add event listeners to the task form fields to validate input on blur
+  const taskForm = document.querySelector('.task-form');
+  taskForm.elements['taskName'].addEventListener('blur', (event) => {
+    const title = event.target.value.trim();
+    if (title.length > 20) {
+      const errorMessage = 'The title must be no more than 20 characters.';
+      displayErrorMessage(event.target, errorMessage);
+      setValid(false);
+    } else {
+      clearErrorMessage(event.target);
+      setValid(true);
+    }
+  });
+
+  taskForm.elements['taskDescription'].addEventListener('blur', (event) => {
+    const description = event.target.value.trim();
+    if (description.length > 300) {
+      const errorMessage = 'The description must be no more than 300 characters.';
+      displayErrorMessage(event.target, errorMessage);
+      setValid(false);
+    } else {
+      clearErrorMessage(event.target);
+      setValid(true);
+    }
+  });
+
+  taskForm.elements['dueDate'].addEventListener('blur', (event) => {
+    const dueDate = event.target.value.trim();
+    const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+    if (!dateRegex.test(dueDate)) {
+      const errorMessage = 'Please enter the due date in the format DD/MM/YYYY.';
+      displayErrorMessage(event.target, errorMessage);
+      setValid(false);
+    } else {
+      clearErrorMessage(event.target);
+      setValid(true);
+    }
+  });
+
+  // Function to display an error message for a form field
+  function displayErrorMessage(field, message) {
+    const errorElement = field.nextElementSibling;
+    if (errorElement && errorElement.classList.contains('task-validation-error-message')) {
+      errorElement.textContent = message;
+    } else {
+      const newErrorElement = document.createElement('p');
+      newErrorElement.textContent = message;
+      newErrorElement.classList.add('task-validation-error-message');
+      field.insertAdjacentElement('afterend', newErrorElement);
+    }
+  }
+
+  // Function to clear an error message for a form field
+  function clearErrorMessage(field) {
+    const errorElement = field.nextElementSibling;
+    if (errorElement && errorElement.classList.contains('task-validation-error-message')) {
+      errorElement.remove();
+    }
+  }
 });
 
 //Close tasks modal

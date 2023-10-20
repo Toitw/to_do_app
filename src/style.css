@@ -185,6 +185,12 @@ body, ul {
     margin-bottom: 10px;
 }
 
+.task-validation-error-message {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
 /* Style for the project modal */
 .project-modal {
     display: none;

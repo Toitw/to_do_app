@@ -1,5 +1,6 @@
 import { projects } from "./projects.js";
 import { addTaskToList, closeModal } from "./dom.js";
+import { getValid } from "./validations.js";
 
 // Define the Task object factory
 function Task(title, project, description, dueDate, priority) {
@@ -21,8 +22,15 @@ function Task(title, project, description, dueDate, priority) {
 
   // Add an event listener to the task form to handle form submissions
   taskForm.addEventListener('submit', (event) => {
-    // Prevent the default form submission behavior
-    event.preventDefault();
+    console.log(getValid());
+    if (!getValid()) {
+      console.log(getValid())
+      // Prevent the default form submission behavior
+      event.preventDefault();
+    } else {
+      console.log(getValid())
+    }
+
   
     // Get the values of the form fields
     const title = taskForm.elements['taskName'].value;
