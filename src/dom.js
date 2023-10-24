@@ -1,6 +1,6 @@
 import { completeTask, deleteTask } from './tasks.js';
 import { projects } from './projects.js';
-import { setValid, getValid } from './validations.js';
+import { setValid, nameIsValid, descriptionIsValid, dateIsValid } from './validations.js';
 
 let activeTask = null;
 
@@ -19,22 +19,22 @@ addTaskButton.addEventListener('click', () => {
     if (title.length > 20) {
       const errorMessage = 'The title must be no more than 20 characters.';
       displayErrorMessage(event.target, errorMessage);
-      setValid(false);
+      setValid('name', false);
     } else {
       clearErrorMessage(event.target);
-      setValid(true);
+      setValid('name', true);
     }
   });
 
   taskForm.elements['taskDescription'].addEventListener('blur', (event) => {
     const description = event.target.value.trim();
-    if (description.length > 300) {
-      const errorMessage = 'The description must be no more than 300 characters.';
+    if (description.length > 300 && description.length < 1) {
+      const errorMessage = 'The description must be no more than 300 characters and not left blank.';
       displayErrorMessage(event.target, errorMessage);
-      setValid(false);
+      setValid('description', false);
     } else {
       clearErrorMessage(event.target);
-      setValid(true);
+      setValid('description', true);
     }
   });
 
@@ -44,10 +44,10 @@ addTaskButton.addEventListener('click', () => {
     if (!dateRegex.test(dueDate)) {
       const errorMessage = 'Please enter the due date in the format DD/MM/YYYY.';
       displayErrorMessage(event.target, errorMessage);
-      setValid(false);
+      setValid('date', false);
     } else {
       clearErrorMessage(event.target);
-      setValid(true);
+      setValid('date', true);
     }
   });
 
