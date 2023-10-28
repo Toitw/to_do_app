@@ -131,14 +131,25 @@ function addProjectToList(project) {
   projectList.appendChild(projectItem);
 }
 
-//Add task to the task list
+// Add task to the task list
 function addTaskToList(task, project) {
   const projectItem = document.querySelector(`li[data-project="${project.name}"]`);
   const taskItem = document.createElement('li');
   taskItem.classList.add('task-item');
   taskItem.dataset.task = task.title;
   taskItem.textContent = task.title;
-  projectItem.appendChild(taskItem);
+
+  // Check if the project item has a task item container
+  let taskItemContainer = projectItem.querySelector('.task-item-container');
+  if (!taskItemContainer) {
+    // Create a new task item container if it does not exist
+    taskItemContainer = document.createElement('div');
+    taskItemContainer.classList.add('task-item-container');
+    projectItem.appendChild(taskItemContainer);
+  }
+
+  // Append the task item to the task item container
+  taskItemContainer.appendChild(taskItem);
 }
 
 // Initialize showCompleted variable from local storage or default to false

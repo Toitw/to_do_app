@@ -48,10 +48,55 @@ body, ul {
     margin-top: 20px;
 }
 
-.task-item {
-  cursor: default;
-  color: #e65a5a;
-  list-style-type: none;
+.projects-button-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 1rem 0; /* Add margin to the top and bottom */
+}
+
+/* Project options button */
+.projects button {
+  background-color: #4CAF50; /* Set the background color */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-right: 10px;
+  border-radius: 5px; /* Add rounded corners */
+  font-weight: bold;
+}
+
+.projects button:hover {
+  background-color: #3e8e41; /* Change the background color on hover */
+  transition: background-color 0.3s ease-in-out; /* Add a transition effect */
+}
+
+/*Project display*/
+.project-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.project-item {
+  font-size: 1.4rem; /* Increase the font size */
+  font-weight: bold; /* Add a font-weight property */
+  margin: 1rem 0; /* Add margin to the top and bottom */
+}
+
+.task-item-container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 10px 0;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.task-item{
+    font-size: 1rem;
+    margin: 0.5rem 0;
+    color: #ddd;
 }
 
 /* Style for the main section */
