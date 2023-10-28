@@ -109,7 +109,7 @@ body, ul {
     flex: 1;
     padding: 20px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     margin-left: 300px; /* Add margin to the main section */
     padding-top: 0; /* Remove top padding */
@@ -196,11 +196,10 @@ body, ul {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999; /* Ensures the modal is on top of other elements */
 }
+
 
 .task-form {
   display: flex;
