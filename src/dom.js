@@ -12,6 +12,7 @@ const taskModal = document.querySelector('.task-modal');
 addTaskButton.addEventListener('click', () => {
   taskModal.style.display = 'block';
   updateProjectList();
+
   // Add event listeners to the task form fields to validate input on blur
   const taskForm = document.querySelector('.task-form');
   taskForm.elements['taskName'].addEventListener('blur', (event) => {

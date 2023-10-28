@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todin list</title>
     <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
     <div class="container">
         <div class="sidebar">
-            <h1>To-Do List</h1>
+            <h1>T'Odin List</h1>
             <div class="projects">
               <div class="projects-button-row">
                 <button class="show-completed-button"></button>
@@ -69,22 +70,21 @@
     <div class="task-modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
-            <h2>Add a New Task</h2>
             <form class="task-form">
-                <label for="task-name">Task Name:</label>
-                <input type="text" id="task-name" name="taskName" required>
+                <label for="task-name"></label>
+                <input type="text" id="task-name" name="taskName" required placeholder="Name of the task">
               
-                <label for="project">Project:</label>
+                <label for="project"></label>
                 <select id="project" name="project">
                 </select>
               
-                <label for="due-date">Due date:</label>
-                <input type="text" id="due-date" name="dueDate" required>
+                <label for="due-date"></label>
+                <input type="text" id="due-date" name="dueDate" required placeholder="dd/mm/yyyy">
               
-                <label for="task-description">Description:</label>
-                <textarea id="task-description" name="taskDescription"></textarea>
+                <label for="task-description"></label>
+                <textarea id="task-description" name="taskDescription" placeholder="What is your task about?"></textarea>
               
-                <label for="priority">Priority:</label>
+                <label for="priority"></label>
                 <select id="priority" name="priority">
                   <option value="low">Low Priority</option>
                   <option value="medium">Medium Priority</option>
