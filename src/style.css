@@ -52,7 +52,7 @@ body, ul {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 1rem 0; /* Add margin to the top and bottom */
+  margin: 2rem 0; /* Add margin to the top and bottom */
 }
 
 /* Project options button */
@@ -85,18 +85,23 @@ body, ul {
 }
 
 .task-item-container {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    padding: 10px 0;
-    cursor: pointer;
-    margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  cursor: pointer;
 }
 
 .task-item{
-    font-size: 1rem;
-    margin: 0.5rem 0;
-    color: #ddd;
+  font-size: 1rem;
+  color: #ddd;
+  width: 265px;
+  padding: 10px 10px 10px 20px;
+}
+
+.task-item:hover {
+  background-color: #444;
+  transition: background-color 0.3s ease-in-out;
+  border-radius: 5px;
 }
 
 /* Style for the main section */
