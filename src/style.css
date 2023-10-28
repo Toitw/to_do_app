@@ -104,25 +104,35 @@ body, ul {
   border-radius: 5px;
 }
 
-/* Style for the main section */
+/* Updated styles for the main section */
 .main {
-    flex: 1;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-left: 300px; /* Add margin to the main section */
-    padding-top: 0; /* Remove top padding */
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start; /* Align to the top */
+  justify-content: flex-end; /* Align to the right */
+  margin-left: 300px; /* Add margin to the main section */
+  padding-top: 0; /* Remove top padding */
 }
 
 .add-task-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    margin-bottom: 20px;
+  width: auto;
+  background-color: #3498db; /* Adjusted color for a more stylish appearance */
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  padding: 10px 20px; /* Increased button size */
+  cursor: pointer;
+  margin: 30px 0 20px 150px;
+  border-radius: 5px; /* Increased border radius for a rounded look */
+  transition: transform 0.3s; /* Added animation for a hover effect */
 }
+
+.add-task-button:hover {
+  transform: scale(1.1); /* Enlarge button on hover */
+}
+
 
 /* Style for task details section */
 .task-details {
@@ -196,7 +206,6 @@ body, ul {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
   justify-content: center;
   align-items: center;
   z-index: 999; /* Ensures the modal is on top of other elements */
